@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>fintech_service</title>
+    </head>
+    <body>
+        <h1>h1 태그 입니다</h1>
+        <h2>h2 태그 입니다</h2>
+        <h3>h3 태그 입니다</h3>
+        <h4>h4 태그 입니다</h4>
+        <h5>h5 태그 입니다</h5>
+        <h6>h6 태그 입니다</h6>
+        <a href="http://www.naver.com">네이버</a>\
+        <p>p 태그 입니다. 문단을 작성할 때 사용합니다.</p>
+        <p>p 태그 입니다<br> 문단을 작성할 때<br> 사용합니다.</p>
+         <!-- h태그
+         h태그는 제목임
+         h1 ~ h6까지 있음
+         순서대로 써야한다는 특징이 있음
+         순서대로 쓰지 않으면 검색결과로 나오지 않음.
+         -->
+         <!-- p태그
+          본문 작성시 사용하는 태그
+          한 줄이 꽉 차지 않아도 줄바꿈이 이뤄집니다.
+          -->
+        <!-- a 태그
+         인라인태그입니다. 한 줄이 꽉 채워져야 줄바꿈이 이뤄집니다. -->
+         <!-- br 태그
+          줄을 바꿀 때 사용하는 태그
+          태그와 태그 사이에만 사용하는 것이 아닌 한 문장 내에서도 사용가능합니다.
+         -->
+        <!-- del 태그
+         삭제 표시 -->
+         <p>오늘만 대 할인!!!! <del>50000</del> 30000</p>
+        <!-- sub, sup 태그
+         첨자 태그 -->
+         <p>h<sup>2</sup></p>
+         <p>h<sub>2</sub></p>
+         <!-- div 태그
+          구역을 지정해주는 태그
+          많은 걸 한 번에 설정하려고 할 때 일일히 설정하는 것보다 한 번에 묶어서 하는 게 좋으니까 사용
+           -->
+        <div class="movie">
+            <p>영화 소개</p>
+            <p>영화를 소개하는 페이지입니다.</p>
+        </div>
+        <div class="tv">
+            <p>tv 프로그램 소개</p>
+            <p>tv 프로그램을 소개하는 페이지입니다.</p>
+        </div>
+        <!-- span -->
+         <p>영화를 소개하는 <span style="color: red;">페이지</span>입니다.</p>
+        <!-- 목록 태그
+         ol(ordered list), ul(unordered list), dl(description list)
+         ol, ul 안쪽에 들어가는 세부 항목으론 li태그(list)
+         -->
+         <h1>판매중인 과일</h1>
+         <ol>
+            <li>바나나</li>
+            <li>수박</li>
+            <li>사과</li>
+         </ol>
+         <ul>
+            <li>바나나</li>
+            <li>수박</li>
+            <li>사과</li>
+         </ul>
+         <dl>
+            <dt>타이틀임</dt>
+            <dd>바나나</dd>
+            <dd>수박</dd>
+            <dd>사과</dd>
+         </dl>
+        <!-- 링크와 이미지 넣기 -->
+        <!-- 링크는 a 태그 href = "대상경로" target = "링크 연결 방식" title="링크 설명"-->
+         <a href="#">주소를 모르는 링크</a><br>
+         <a href="http://www.naver.com" target="_blank">네이버 바로가기</a><br>
+         <!-- 위는 새 탭이 켜짐 -->
+         <a href="http://www.naver.com" target="_parent">네이버 바로가기_parent</a><br>
+         <!-- 위는 새 탭이 아닌 기존 탭이 링크로 바뀜 -->
+         <a href="http://www.naver.com" target="_self">네이버 바로가기_self</a><br>
+         <!-- 위는 새 탭이 아닌 기존 탭이 링크로 바뀜 -->
+         <a href="http://www.naver.com">네이버 바로가기 target 없음 - 현재창에 표시</a><br>
+         <a href="http://www.naver.com" target="_blank" title="네이버로 가는 링크">네이버 바로가기</a><br>
+         <!-- 마우스를 갖다대면 네이버로 가는 링크라고 텍스트가 뜸 -->
+         
+         <!-- 이미지 넣기 -->
+          <img src="이미지" alt="사진이 없거나 사진에 대한 설명이 필요할 때 작성">
+          <img src="속상해.png" alt="사진">
+          <a href="http://www.naver.com"><img src="속상해.png" alt="사진"></a>
+          <img src="C:/Fintech_PM/03_html_css_js/js/속상해.png" alt="이라니">
+        <!-- strong, em(empasis) 태그 -->
+        <!-- 텍스트 강조 태그 -->
+         <p>이 시설은 <strong>출입금지입니다.</strong></p>
+         <!-- strong은 볼드체 -->
+         <em>강조하고 싶은 텍스트</em>
+         <!-- em은 기울임체 -->
+
+        <!-- form 태그 -->
+        <!-- 태그 사용자로부터 데이터를 입력받아 서버로 전송할 때 사용 -->
+        <!-- input 태그 -->
+        <!-- 사용자로부터 데이터를 입력받는 태그 -->
+         <!-- input type="데이터 종류", name="이름" => 변수명, value="초깃값" -->
+        <p>텍스트 : <input type="text" placeholder="text"></p>
+        <p>패스워드  <input type="password" placeholder="비밀번호를 입력하세요"></p>
+        <p>tel : <input type="tel" placeholder="010-0000-0000"></p>
+        <p>number : <input type="number" placeholder="숫자만 입력"></p>
+        <p>url : <input type="url" placeholder="url 입력"></p>
+        <p>radio : <input type="radio" placeholder="라디오 버튼"></p>
+        <p>checkbox : <input type="checkbox" placeholder="체크박스"></p>
+        <p>submit : <input type="submit" placeholder="제출하기"></p>
+        <p>month : <input type="month"></p>
+        <!-- textarea -->
+        <!-- 텍스트를 여러 줄 입력해야 할 때 -->
+         <form action="#" method="post">
+            <fieldset>
+                <legend>블로그 글쓰기</legend>
+                <p>
+                    <label for="title">제목
+                        <input type="text" id="title" name="title">
+                    </label>
+                </p>
+                <p>
+                    <label for="desc">내용
+                        <textarea name="desc" id="desc"></textarea>
+                    </label>
+                </p>
+            </fieldset>
+         </form>
+         <!-- select, option, optgroup -->
+          <!-- <select>
+            <optgroup label="그룹 이름">
+                <option value="서버에 전송할 값">웹브라우저에 표시할 값</option>
+            </optgroup>
+          </select> -->
+          <select name="city" id="city">
+            <option value="강북구">강북구</option>
+            <option value="강남구">강남구</option>
+            <option value="서초구">서초구</option>
+          </select>
+          <br>
+          <br>
+          <select name="city" id="city">
+            <optgroup label="서울시">
+                <option value="강북구">강북구</option>
+                <option value="강남구">강남구</option>
+                <option value="서초구">서초구</option>
+            </optgroup>
+            <optgroup label="성남시">
+                <option value="중원구">중원구</option>
+                <option value="분당구">분당구</option>
+            </optgroup>
+          </select>
+          <br>
+          <br>
+          <!-- 사이즈로 바로 볼 수 있는 옵션 개수 정하기 & 2개 이상 선택 가능한 옵션 -->
+          <select name="city" id="city" size = "4" multiple>
+            <optgroup label="서울시">
+                <option value="강북구">강북구</option>
+                <option value="강남구">강남구</option>
+                <option value="서초구">서초구</option>
+            </optgroup>
+            <optgroup label="성남시">
+                <option value="중원구">중원구</option>
+                <option value="분당구">분당구</option>
+            </optgroup>
+          </select>
+
+          <!-- selected로 select에서 디폴트값 주기 -->
+          <select name="city" id="city" size = "4" multiple>
+            <optgroup label="서울시">
+                <option value="강북구">강북구</option>
+                <option value="강남구">강남구</option>
+                <option value="서초구" selected>서초구</option>
+            </optgroup>
+            <optgroup label="성남시">
+                <option value="중원구">중원구</option>
+                <option value="분당구">분당구</option>
+            </optgroup>
+          </select>
+          <!-- button 태그 -->
+           <button type="submit">제출하기</button>
+        <!-- maxlength -->
+        <!-- input태그에서 입력받는 길이를 제한하는 태그 -->
+        <p>글자입력 : <input type="text" maxlength="4"></p>
+    </body>
+</html>
