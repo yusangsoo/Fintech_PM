@@ -1,0 +1,26 @@
+.title {
+    color: blue;
+    text-align: center;
+}
+
+.odd {
+    color: orange;
+    text-align: left;
+}
+
+.even {
+    color: brown;
+    text-align: right;
+}
+
+#bookname {
+    text-shadow: 2px;
+    font-size: xx-large;
+}
+
+/* css는 선택자{스타일 속성} */
+p {
+    color: red;
+    text-align: left;
+    font-size: 12px;
+}
