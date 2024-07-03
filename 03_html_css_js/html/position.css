@@ -1,0 +1,121 @@
+.box {
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    line-height: 100px;
+    color: white;
+}
+
+.red-box {
+    background-color: red;
+}
+
+.green-box {
+    background-color: green;
+}
+
+.blue-box {
+    background-color: blue;
+}
+
+.red-box2 {
+    background-color: red;
+}
+
+.green-box2 {
+    background-color: green;
+}
+
+.blue-box2 {
+    background-color: blue;
+}
+
+body {
+    margin: 0;
+}
+
+/* position */
+/* 
+요소를 임의로 배치하는 위치 속성
+static : 기본 흐름. 만들어진 순서
+relative : 요소의 기본 흐름에 따라 배치, 좌표속성 사용 가능
+absolute : 웹브라우저의 절대 좌표 이용
+fixed : 위치고정
+sticky : 지정한 좌표의 임계점에 이르면 위치고정
+*/
+
+/* relative
+top : 위쪽을 기준으로 좌표 지정
+right : 오른쪽을 기준으로 좌표 지정
+bottom : 아래쪽을 기준으로 좌표 지정
+left : 왼쪽을 기준으로 좌표 지정
+왼쪽 모서리가 기준점임
+*/
+.green-box {
+    position: relative;
+    left: 100px;
+    top: 100px;
+}
+
+/* absolute */
+/* 웹 브라우저의 왼쪽 위 모서리가 기준점 */
+.green-box2 {
+    position: absolute;
+    left: 100px;
+    top: 100px;
+}
+
+/* fixed */
+/* 계속 고정 */
+
+/* .blue-box {
+    position: fixed;
+    left: 200px;
+} */
+
+/* sticky */
+/* 지정한 좌표로 오면 고정 */
+
+/* .red-box2 {
+    position: sticky;
+    top: 0;
+} */
+
+/* z-index
+z-index:n; 을 주게 되는데
+n은 점수라고 생각하면 됨.
+점수가 더 높은 애가 더 앞으로 나옴
+*/
+.blue-box2 {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+}
+
+.red-box {
+    position: relative;
+    z-index: 10;
+}
+
+/* float
+글에 이미지 끼워 넣기
+float 방향 입력한 곳에 요소 위치시키고 다음에 있는 요소를 함께 위치함.
+*/
+
+.float img {
+    float: left;
+    margin-right: 1rem;
+}
+
+/* 블록요소를 인라인 요소처럼 배치하기 */
+.red-box3 {
+    color: white;
+    background-color: red;
+    float: left;
+}
+
+.blue-box3 {
+    color: white;
+    background-color: blue;
+    float: left;
+}
