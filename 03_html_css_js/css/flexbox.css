@@ -1,0 +1,59 @@
+.flex-container {
+    width: 300px;
+    height: 200px;
+    background-color: gray;
+    border: 1px solid black;
+    display: flex;
+    /* flex로 설정하기 */
+    /* flex-direction: row; */
+
+    /* 정렬 방향 설정 */
+    /* row, row-reverse, column, column-reverse */
+    /* flex-wrap: wrap; */
+    /* 제한된 영역을 넘었을 때 줄바꿈 실행 */
+
+    flex-flow: row wrap;
+    /* direction + wrap을 같이 씀 */
+
+    /* 가로방향(x축) 아이템 정렬 */
+    justify-content : flex-start;
+    /* justify-content : flex-end*/
+    /* justify-content : center*/
+    /* justify-content : space-between */
+    /* justify-content : space-around*/
+    /* justify-content : space-evenly*/
+
+    /* 세로방향(y축) 아이템 정렬 */
+    /* align-items: stretch; */
+    /* align-items: flex-start; */
+    /* align-items: flex-end; */
+    /* align-items: center; */
+    /* align-items: baseline; */
+
+    /* wrap이 돼 2줄 이상일 때 */
+    /* align-content: flex-start;
+    align-content: flex-end; */
+    /* align-content: flex-start; */
+}
+
+.flex-item:nth-child(1) {
+    align-self: flex-start;
+}
+.flex-item:nth-child(2) {
+    align-self: flex-end;
+}
+.flex-item:nth-child(3) {
+    align-self: center;
+}
+.flex-item:nth-child(4) {
+    align-self: baseline;
+}
+
+.flex-item {
+    color: white;
+    background-color: brown;
+}
+
+.flex-item:nth-child(2n) {
+    background-color: rgba(255, 0, 0, 0.3);
+}

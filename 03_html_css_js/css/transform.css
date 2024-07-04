@@ -1,0 +1,51 @@
+div {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    color: white;
+    line-height: 100px;
+    text-align: center;
+}
+
+/* transform
+요소를 변형시킴
+이동, 확대, 축소, 기울이기
+*/
+
+/*
+이동시키기
+transform: translate(x축, y축)
+*/
+div:hover {
+    transform: translate(100px, 200px);
+}
+
+/*
+확대, 축소 scale()
+()괄호 안에 숫자가 들어가는데 배율임. 1보다 작으면 축소, 1보다 크면 확대
+*/
+div:hover {
+    transform: scale(0.75);
+}
+
+/*
+기울이기
+skew(xdeg,ydeg)
+*/
+
+/* div:hover {
+    transform: skew(20deg, 20deg);
+} */
+
+/* 
+회전하기
+rotate(deg)
+기준점 잡기
+transform-origin : x y
+x는 left, center, right
+y는 top, center, bottom
+*/
+div:hover {
+    transform: rotate(255deg);
+    transform-origin: right bottom;
+}

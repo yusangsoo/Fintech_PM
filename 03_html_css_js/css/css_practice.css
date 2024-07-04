@@ -171,6 +171,7 @@ div.structural p:last-child {
 }
 
 /* :nth-child(n) -> 셀렉터에 해당하는 모든 요소 중 앞에서 n번째인 자식 요소를 선택*/
+/* 부모의 모든 자식 요소를 고려하기 때문에, 선택하려는 요소가 같은 타입의 요소인지 여부는 고려하지 않습니다. */
 /* :nth-last-child(n) -> 셀렉터에 해당하는 모든 요소 중 뒤에서 n번째인 자식 요소를 선택*/
 /* n = 0이 기본, 짝수하려면 2n, 홀수는 2n+1 */
 div.nth_child ol > li:nth-child(2n) {
@@ -190,6 +191,7 @@ div.nth_child ul > li:nth-last-child(2n) {
 /* :first-of-type -> 셀렉터에 해당하는 요소의 부모 요소의 자식 중에서 첫번째 등장하는 요소 선택*/
 /* :last-of-type -> 셀렉터에 해당하는 요소의 부모 요소의 자식 중에서 마지막에 등장하는 요소 선택*/
 /* :nth-of-type(n) -> 셀렉터에 해당하는 요소의 부모 요소의 자식 중에서 앞에서 n번째 등장하는 요소 선택*/
+/* 부모의 자식 요소들 중에서 같은 타입의 요소들만 고려합니다. */
 /* :nth-last-of-type(n) -> 셀렉터에 해당하는 요소의 부모 요소의 자식 중에서 뒤에서 n번째 등장하는 요소 선택*/
 
 div.of_type p:first-of-type {
@@ -204,6 +206,12 @@ div.of_type p:nth-of-type(2) {
 div.of_type p:nth-last-of-type(2) {
     color: violet;
 }
+
+/*
+nth-child와 nth-of-type의 차이 :
+nth-child는 부모의 모든 자식 요소를 대상으로 하여 순서를 매깁니다.
+반면, nth-of-type은 동일한 태그명을 가진 형제 요소들만을 대상으로 순서를 매깁니다.
+*/
 
 /* 정합성 검증 셀렉터 */
 /* :vaild -> 정합성 검증이 성공한 input or form 요소를 선택 */

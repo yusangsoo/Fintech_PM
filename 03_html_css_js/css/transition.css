@@ -1,0 +1,95 @@
+.transition .red_box {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    color: white;
+    text-align: center;
+    line-height: 100px;
+}
+
+.red_box:hover {
+    background-color: blue;
+    transition-duration: 3s;
+    /* 3초 동안 서서히 바뀜 */
+    transition-delay: 2s;
+    /* 2초 후 transition이 작동됨 */
+}
+
+/* ===================== */
+/* div.transition .red_box {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    color: white;
+    text-align: center;
+    line-height: 100px;
+}
+
+.red_box:hover {
+    background-color: blue;
+} */
+ /* =========================== */
+/*
+위 코드가 먹히지 않았던 이유
+
+.transition .red_box:
+
+.transition은 클래스 선택자: 10
+.red_box도 클래스 선택자: 10
+따라서 .transition .red_box의 우선순위: 10 + 10 = 20
+
+.red_box:hover
+
+.red_box:hover는 우선순위가 10 (클래스 선택자) + 10 (의사 클래스 선택자) = 20입니다.
+우선순위가 동등
+그러나 div.가 추가된다면 태그 선택자(+1)이 추가되므로
+div.transition .red_box:의 점수는 21점이므로 우선이 됨.
+21점 vs 20점이므로 hover를 해도 바뀌지 않았던 것
+
+이를 방지하기 위해 선택자를 일관되게 사용하는 것도 방법
+*/
+
+/* transition-property 속성값
+none : 전환 효과 속성을 지정하지 않음
+all : 모든 속성을 전환 효과 대상으로 지정
+background-color, color, width 등
+
+transition-duration : 시간 1s, 500ms; -> 트랜지션이 완료되는 시간
+transition-delay : 시간 1s, 500ms; -> 효과 작동 시간이 지연
+transition-timing-function : 전환 효과의 진행 속도를 지정
+    linear : 처음 속도와 마지막 속도가 일정
+    ease : 처음에는 속도가 빠르다가 중간부터 느려짐 *기본값
+    ease-in : 처음에는 속도가 느리지만 완료될 때까지 점점 빨라짐
+    ease-out : 처음에는 속도가 빠르지만 완료될 때까지 점점 느려짐
+    ease-in-out : 처음에는 속도가 느리지만 점점 빨라지다 다시 느려짐
+*/
+
+.container .bar {
+    width: 10px;
+    transition-property: width;
+    transition-duration: 5s;
+    border: 1px solid black;
+    margin-bottom: 10px;
+    background-color: gray;
+    color: white;
+}
+
+.container:hover .bar {
+    width: 220px;
+}
+
+.bar:nth-child(1) {
+    transition-timing-function: linear;
+}
+.bar:nth-child(2) {
+    transition-timing-function: ease;
+}
+.bar:nth-child(3) {
+    transition-timing-function: ease-in;
+}
+.bar:nth-child(4) {
+    transition-timing-function: ease-out;
+}
+.bar:nth-child(5) {
+    transition-timing-function: ease-in-out;
+}
