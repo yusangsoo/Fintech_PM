@@ -1,19 +1,20 @@
 import os
 import pandas as pd
 from datetime import date
-from dotenv import load_dotenv
+from dbenv import db, dbtype, id, pw, host, db_name
+# from dotenv import load_dotenv
 from sqlalchemy import create_engine
 import pymysql
 import time
 import requests
 from bs4 import BeautifulSoup
 pymysql.install_as_MySQLdb()
-load_dotenv(dotenv_path = ".env_db")
+# load_dotenv(dotenv_path = ".env_db")
 
 def db_connect() :
     # env 파일을 못 읽어서 실행 파일이 오류가 남.
     # engine = create_engine(f"{os.getenv('db')}+{os.getenv('dbtype')}://{os.getenv('id')}:{os.getenv('pw')}@{os.getenv('host')}/{os.getenv('db_name')}")
-    engine = create_engine("mysql+pymysql://root:1234@127.0.0.1:3306/korea_stock_info")
+    engine = create_engine("%s+%s://%s:%s@%s/%s" %(db, dbtype, id, pw, host, db_name))
     conn = engine.connect()
     return conn
 
