@@ -20,7 +20,7 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 import datetime
 
 # 시작 날짜와 끝 날짜 설정
-start_date = datetime.date(2000, 9, 27)
+start_date = datetime.date(2013, 10, 23)
 end_date = datetime.date(2024, 7, 31)
 
 # 월요일부터 금요일에 해당하는 날짜 리스트 생성
