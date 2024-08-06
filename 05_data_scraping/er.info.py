@@ -1,3 +1,4 @@
+# 특정 날짜부터 특정 날짜까지 평일에 해당하는 날짜만 환율 수집하기
 import os
 import pandas as pd
 from datetime import date
@@ -19,9 +20,10 @@ import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
 import datetime
 
+
 # 시작 날짜와 끝 날짜 설정
-start_date = datetime.date(2013, 10, 23)
-end_date = datetime.date(2024, 7, 31)
+start_date = datetime.date(2023, 1, 6)
+end_date = datetime.date(2024, 8, 5)
 
 # 월요일부터 금요일에 해당하는 날짜 리스트 생성
 weekdays = []
