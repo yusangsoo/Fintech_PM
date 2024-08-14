@@ -2,3 +2,4 @@
 .env_db
 dbenv.py
 *.exe
+movie_title_data.tsv
