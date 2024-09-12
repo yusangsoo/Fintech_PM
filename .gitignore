@@ -5,3 +5,6 @@ dbenv.py
 movie_title_data.tsv
 .keras
 *.keras
+model
+.joblib
+*.jpg

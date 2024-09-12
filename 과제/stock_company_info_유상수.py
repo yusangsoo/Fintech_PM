@@ -41,7 +41,7 @@ def create_database_if_not_exists(db_name):
     conn.close()
 
 # db에 저장하는 함수
-def stock_info_to_db(df, db_name="korea_stock") :
+def stock_info_to_db(df, db_name="korean_stock") :
     today = str(date.today()).replace("-", "_")
     
     # 데이터베이스 존재 여부 확인 및 생성
