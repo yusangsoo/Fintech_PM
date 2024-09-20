@@ -8,3 +8,4 @@ movie_title_data.tsv
 model
 .joblib
 *.jpg
+seoul-metro-2021.logs.csv
