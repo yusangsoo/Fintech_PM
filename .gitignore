@@ -9,3 +9,4 @@ model
 .joblib
 *.jpg
 seoul-metro-2021.logs.csv
+*.png
