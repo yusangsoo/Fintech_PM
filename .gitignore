@@ -10,3 +10,5 @@ model
 *.jpg
 seoul-metro-2021.logs.csv
 *.png
+.chatbot.env
+models
