@@ -12,3 +12,4 @@ seoul-metro-2021.logs.csv
 *.png
 .chatbot.env
 models
+아파트실거래데이터.csv
