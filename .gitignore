@@ -1,6 +1,7 @@
 .env
 .env_db
 dbenv.py
+project/*.py
 *.exe
 movie_title_data.tsv
 .keras
@@ -16,3 +17,4 @@ models
 아파트실거래데이터.csv
 data
 AutogluonModels/
+__pycache__/
