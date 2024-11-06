@@ -1,7 +1,8 @@
 .env
 .env_db
 dbenv.py
-project/*.py
+project/dbenv.py
+project/dbio.py
 *.exe
 movie_title_data.tsv
 .keras
@@ -18,3 +19,4 @@ models
 data
 AutogluonModels/
 __pycache__/
+project/.env_openai
