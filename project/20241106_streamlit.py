@@ -225,9 +225,10 @@ for loc in locations:
 # 왼쪽에 지도 표시
 with st.container():
 
-    with st.expander("정보", icon=":material/info:"):
+    with st.expander("정보"):
         st.write(
-            "목적과 지역을 선택해서 그 지역의 분위기를 알아보세요. 이 지도는 서울 여러 지역의 분위기를 보여줍니다. 각 분위기는 팀 복례의 정성스런 데이터 수집과 철저한 분석을 통해 도출한 결과입니다."
+            """목적과 지역을 선택해서 지역 분위기를 알아보세요.
+            보고 계신 버전은 1차로 만든 버전입니다."""
             )
     
     col1, col2 = st.columns([3, 2])
@@ -265,7 +266,6 @@ with st.container():
             </style>
             <div class="title-and-buttons">
                 <span class="title">서울 분위기 지도</span>
-                <a href="https://forms.gle/25VCWoyXeXKuD4Av6" target="_blank" class="small-button">더 알아보고 싶은 지역 추가하기</a>
                 <a href="https://forms.gle/di1BSZWZ4xZAzDJC8" target="_blank" class="small-button">만족도 조사</a>
             </div>
             """,
@@ -275,6 +275,15 @@ with st.container():
         # 지도 표시
         # st_folium(m, width=1280, height=800)
         st_folium(m, width=960, height=600)
+        
+ 
+        plus_region = st.text_input('지역', value = None, label_visibility = 'collapsed', placeholder = "추가하고 싶은 지역을 적고 엔터를 눌러주세요. 예시) 샤로수길, 흑석동")
+        # st.write("입력하신 지역은", plus_region, '입니다. 의견 감사합니다.')
+        # 입력이 있을 경우 파일에 저장
+        if plus_region:
+            with open("추가하고 싶은 지역.txt", "a") as f:
+                f.write(plus_region + "\n")
+            st.success("의견 감사합니다.")
 
 
     with col2:
