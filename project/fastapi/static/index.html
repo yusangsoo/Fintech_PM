@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kakao Map with Drawer</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=cf3a0088cdd7e5a988917a5d9d8f16c9"></script>
+</head>
+<body>
+    <div id="map" style="width: 100%; height: 100vh;"></div>
+
+    <!-- Drawer (사이드 메뉴) -->
+    <div id="drawer" class="drawer">
+        <button id="closeDrawer" class="close-btn">X</button>
+        <div id="drawerContent">
+            <h3>마커 정보</h3>
+            <p id="markerInfo">여기에 정보가 표시됩니다.</p>
+        </div>
+    </div>
+
+    <script src="/static/js/script.js"></script>
+</body>
+</html>

@@ -2,29 +2,142 @@ import streamlit as st
 
 # HTML과 JavaScript 코드
 def generate_kakao_map_html(lat, lng):
+    # 로컬 이미지 URL 생성 (Streamlit static 폴더 사용)
+
+    
     html_code = f"""
     <!DOCTYPE html>
     <html>
     <head>
         <meta charset="utf-8">
         <title>Kakao Map</title>
-        <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=cf3a0088cdd7e5a988917a5d9d8f16c9"></script>
+        <style>
+            html, body {{ width: 100%; height: 100%; margin: 0; padding: 0; }}
+            .map_wrap {{ position: relative; overflow: hidden; width: 100%; height: 400px; }}
+            .custom_typecontrol {{
+                position: absolute; top: 10px; right: 10px; z-index: 2;
+                display: flex; justify-content: space-between; width: 130px; height: 30px;
+                background: #ffffff; border-radius: 5px; border: 1px solid #919191;
+                font-size: 12px; font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;
+            }}
+            .custom_typecontrol span {{
+                flex: 1; text-align: center; line-height: 30px; cursor: pointer;
+            }}
+            .custom_typecontrol .btn {{
+                background: #fff; background: linear-gradient(#fff, #e6e6e6);
+            }}
+            .custom_typecontrol .btn:hover {{
+                background: #f5f5f5; background: linear-gradient(#f5f5f5, #e3e3e3);
+            }}
+            .custom_typecontrol .selected_btn {{
+                color: #fff; background: #425470; background: linear-gradient(#425470, #5b6d8a);
+            }}
+            .custom_zoomcontrol {{
+                position: absolute; top: 50px; right: 10px; z-index: 2;
+                display: flex; flex-direction: column; width: 36px; height: 80px;
+                background-color: #f5f5f5; border-radius: 5px; border: 1px solid #919191;
+            }}
+            .custom_zoomcontrol span {{
+                width: 36px; height: 40px; text-align: center; cursor: pointer;
+                display: flex; align-items: center; justify-content: center;
+            }}
+            .custom_zoomcontrol span img {{
+                width: 15px; height: 15px;
+            }}
+            .custom_zoomcontrol span:first-child {{
+                border-bottom: 1px solid #bfbfbf;
+            }}
+        </style>
+        <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=cf3a0088cdd7e5a988917a5d9d8f16c9"></script>
     </head>
     <body>
-        <div id="map" style="width:100%;height:400px;"></div>
+        <div class="map_wrap">
+            <!-- 지도 타입 변경 버튼 -->
+            <div class="custom_typecontrol">
+                <span id="btnRoadmap" class="selected_btn" onclick="setMapType('roadmap')">지도</span>
+                <span id="btnSkyview" class="btn" onclick="setMapType('skyview')">스카이뷰</span>
+            </div>
+            <!-- 지도 확대/축소 버튼 -->
+            <div class="custom_zoomcontrol">
+                <span onclick="zoomIn()"><img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_plus.png" alt="확대"></span>
+                <span onclick="zoomOut()"><img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_minus.png" alt="축소"></span>
+            </div>
+            <!-- 지도 -->
+            <div id="map" style="width:100%;height:400px;"></div>
+        </div>
         <script>
-            var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-                mapOption = {{
-                    center: new kakao.maps.LatLng({lat}, {lng}), // 지도의 중심좌표
-                    level: 3 // 지도의 확대 레벨
-                }};
-            var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+            // Kakao 지도 생성
+            var mapContainer = document.getElementById('map'); 
+            var mapOption = {{
+                center: new kakao.maps.LatLng({lat}, {lng}),
+                level: 6
+            }};
+            var map = new kakao.maps.Map(mapContainer, mapOption);
+            
 
-            // 마커를 생성합니다
-            var marker = new kakao.maps.Marker({{
-                position: new kakao.maps.LatLng({lat}, {lng}) // 마커가 표시될 위치
-            }});
-            marker.setMap(map); // 마커를 지도 위에 표시합니다
+
+            // 지도 타입 변경
+            function setMapType(maptype) {{
+                var roadmapControl = document.getElementById('btnRoadmap');
+                var skyviewControl = document.getElementById('btnSkyview');
+                if (maptype === 'roadmap') {{
+                    map.setMapTypeId(kakao.maps.MapTypeId.ROADMAP);
+                    roadmapControl.className = 'selected_btn';
+                    skyviewControl.className = 'btn';
+                }} else {{
+                    map.setMapTypeId(kakao.maps.MapTypeId.HYBRID);
+                    skyviewControl.className = 'selected_btn';
+                    roadmapControl.className = 'btn';
+                }}
+            }}
+
+            // 지도 확대/축소
+            function zoomIn() {{
+                map.setLevel(map.getLevel() - 1);
+            }}
+            function zoomOut() {{
+                map.setLevel(map.getLevel() + 1);
+            }}
+            
+            
+            
+            
+            // 사용자 정의 마커 이미지 URL 및 옵션 설정
+            var imageSrc = 'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjA0MDRfNjQg%2FMDAxNjQ5MDc4ODU1NDk3.2YoSEgtXoq4c66SwGikllJuuSo21Ds0p5Q89B4vFMb8g.N3MCQZ6x2YFojqw3ID3dpH_TNqynKSJGEmzprAnu6pEg.JPEG.milly_stor_y%2Foutput_2686460713.jpg&type=a340'
+            var imageSize = new kakao.maps.Size(64, 69); // 마커 이미지 크기
+            var imageOption = {{ offset: new kakao.maps.Point(27, 69) }}; // 이미지 위치 조정
+
+            // 마커 이미지 생성
+            var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+
+            // 여러 개의 마커를 표시할 좌표 배열
+            var markerPositions = [
+                new kakao.maps.LatLng(37.553905, 126.922566), // 홍대
+                new kakao.maps.LatLng(37.562092, 126.922542), // 연남동
+                new kakao.maps.LatLng(37.548356, 126.912406), // 합정
+                new kakao.maps.LatLng(37.557511, 126.936873), // 신촌
+                new kakao.maps.LatLng(37.557708, 126.944657), // 이대
+                new kakao.maps.LatLng(37.556028, 126.907358), // 망원
+                new kakao.maps.LatLng(37.547127, 126.922107), // 상수
+                new kakao.maps.LatLng(37.568266, 126.930331)  // 연희동
+            ];
+
+            // 반복문을 통해 사용자 정의 마커 생성 및 지도에 추가
+            for (var i = 0; i < markerPositions.length; i++) {{
+                var marker = new kakao.maps.Marker({{
+                    position: markerPositions[i], // 마커 좌표
+                    image: markerImage, // 사용자 정의 이미지 설정
+                    clickable: true
+                }});
+                marker.setMap(map); // 지도에 마커 추가
+            }}
+
+            
+
+            // 전역 함수 등록
+            window.setMapType = setMapType;
+            window.zoomIn = zoomIn;
+            window.zoomOut = zoomOut;
             
             // 2. 다각형 경로 정의
             var polygonPath = [
@@ -111,8 +224,8 @@ def generate_kakao_map_html(lat, lng):
 
 # Streamlit UI
 st.title("📍 Kakao Map Integration with Streamlit")
-default_latitude = "37.5665"
-default_longitude = "126.9780"
+default_latitude = "37.557894"
+default_longitude = "126.924629"
 
 # HTML 지도 생성 및 표시 (항상 표시)
 st.components.v1.html(generate_kakao_map_html(default_latitude, default_longitude), height=450)
