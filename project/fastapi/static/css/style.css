@@ -1,49 +1,175 @@
-/* 기본 스타일 */
+/* General styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    overflow: hidden; /* 스크롤 방지 */
+    background-color: #f9f9f9;
+    color: #333;
 }
 
-/* 지도 스타일 */
-#map {
+#app {
+    display: flex;
+}
+
+/* Navigation Bar Styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
     width: 100%;
-    height: 100vh; /* 화면 전체 높이 */
+    z-index: 1000;
+    height: 50px; /* Ensure consistent height */
 }
 
-/* Drawer 스타일 */
+.navbar-left {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 60px;
+    margin-right: 20px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 15px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-size: 0.9rem;
+    transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+    color: #007bff;
+}
+
+/* Drawer 기본 스타일 */
 .drawer {
     position: fixed;
     top: 0;
-    right: -900px; /* 기본적으로 숨김 */
-    width: 900px;
+    right: -50%;
+    width: 40%;
     height: 100%;
-    background-color: #f4f4f4;
-    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
-    overflow: auto;
-    transition: right 0.3s ease; /* 슬라이드 애니메이션 */
+    background-color: #ffffff;
+    box-shadow: -4px 0 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    overflow-y: auto;
+    transition: right 0.3s ease;
     z-index: 1000;
+    border-left: 1px solid #ddd;
 }
 
-/* Drawer가 활성화될 때 */
+/* Drawer 열림 상태 */
 .drawer.open {
-    right: 0; /* 화면 오른쪽에 나타남 */
+    right: 0;
 }
 
-/* Drawer 닫기 버튼 */
+/* 닫기 버튼 */
 .close-btn {
     position: absolute;
     top: 10px;
     right: 10px;
-    background: red;
+    font-size: 1.5rem;
     color: white;
+    background-color: red;
     border: none;
+    border-radius: 5px;
     padding: 5px 10px;
     cursor: pointer;
 }
 
-/* Drawer 콘텐츠 스타일 */
-#drawerContent {
-    padding: 20px;
+/* 제목 스타일 */
+.title {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* 키워드 태그 */
+.keywords {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.tag {
+    background-color: #6c63ff;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+}
+
+/* 설명 스타일 */
+.description {
+    margin: 15px 0;
+    font-size: 1rem;
+    color: #555;
+}
+
+/* 이미지와 버튼 스타일 */
+.media-container {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.media-img {
+    width: 50%;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #6c63ff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #5a54d2;
+}
+
+/* 영상 스타일 */
+.video-container {
+    margin-top: 20px;
+}
+
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 비율 */
+    height: 0;
+    overflow: hidden;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.map {
+    width: 100%;
+    height: 100vh;
 }

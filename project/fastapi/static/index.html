@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,14 +10,53 @@
     <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=cf3a0088cdd7e5a988917a5d9d8f16c9"></script>
 </head>
 <body>
-    <div id="map" style="width: 100%; height: 100vh;"></div>
+    <header class="navbar">
+        <div class="navbar-left">
+            <img src="/static/images/moodmap.png" alt="Logo" class="logo">
+            <nav class="nav-links">
+                <a href="#home">홈</a>
+                <a href="#gallery">갤러리</a>
+        </div>
+    </header>
+    <div id="map" class="map"></div>
 
-    <!-- Drawer (사이드 메뉴) -->
+    <!-- Drawer -->
     <div id="drawer" class="drawer">
-        <button id="closeDrawer" class="close-btn">X</button>
-        <div id="drawerContent">
-            <h3>마커 정보</h3>
-            <p id="markerInfo">여기에 정보가 표시됩니다.</p>
+        <button id="closeDrawer" class="close-btn">×</button>
+        <!-- 제목 -->
+        <h1 id="drawerTitle" class="title">지역명</h1>
+        
+        <!-- 키워드 태그 -->
+        <div id="drawerKeywords" class="keywords">
+            <span class="tag"># 분위기</span>
+            <span class="tag"># 키워드</span>
+            <span class="tag"># 태그</span>
+        </div>
+        
+        <!-- 설명 -->
+        <p id="drawerDescription" class="description">
+            여기에 장소에 대한 상세 설명이 들어갑니다.
+        </p>
+        
+        <!-- 이미지와 버튼 -->
+        <div class="media-container">
+            <img id="drawerImage" src="/static/images/arin.png" alt="Drawer Image" class="media-img">
+            <button id="photoMoreBtn" class="btn">사진 더보기</button>
+        </div>
+        
+        <!-- YouTube 영상과 버튼 -->
+        <div class="video-container">
+            <div class="video-wrapper">
+                <iframe 
+                    id="drawerVideo"
+                    src="https://www.youtube.com/embed/iggsgJo6Df0?si=H_JL6eZ8ber5CxiK"
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                ></iframe>
+            </div>
+            <button id="videoMoreBtn" class="btn video-more-btn">영상 더보기</button>
         </div>
     </div>
 
