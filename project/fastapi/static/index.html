@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kakao Map with Drawer</title>
+    <title>Moodmap</title>
     <link rel="stylesheet" href="/static/css/style.css">
     <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=cf3a0088cdd7e5a988917a5d9d8f16c9"></script>
 </head>
@@ -41,7 +41,7 @@
         <!-- 이미지와 버튼 -->
         <div class="media-container">
             <img id="drawerImage" src="/static/images/arin.png" alt="Drawer Image" class="media-img">
-            <button id="photoMoreBtn" class="btn">사진 더보기</button>
+            <button id="showMorePhotos" class="btn photo-more-btn">사진 더보기</button>
         </div>
         
         <!-- YouTube 영상과 버튼 -->
@@ -57,6 +57,15 @@
                 ></iframe>
             </div>
             <button id="videoMoreBtn" class="btn video-more-btn">영상 더보기</button>
+        </div>
+    </div>
+
+    <div id="photoDrawer" class="drawer">
+        <button id="backButton" class="btn back-button">뒤로 가기</button>
+        <div id="carousel" class="carousel">
+            <button id="prevBtn" class="carousel-btn">◀</button>
+            <div id="carouselImages" class="carousel-images"></div>
+            <button id="nextBtn" class="carousel-btn">▶</button>
         </div>
     </div>
 
