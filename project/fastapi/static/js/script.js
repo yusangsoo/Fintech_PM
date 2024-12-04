@@ -17,25 +17,51 @@ window.onload = function () {
     var drawerImage = document.getElementById("drawerImage");
     var drawerVideo = document.getElementById("drawerVideo");
     var closeDrawerButton = document.getElementById("closeDrawer");
+    const videoSource = document.getElementById('videoSource');
+
 
     // 새 Drawer (사진 더보기용) 관련 요소 선택
     var photoDrawer = document.getElementById("photoDrawer");
     var backButton = document.getElementById("backButton");
     var closeDrawerButton_photo = document.getElementById("closeDrawer");
     var showMorePhotosButton = document.getElementById("showMorePhotos");
-    var carouselImages = document.getElementById("carouselImages");
+    // var carouselImages = document.getElementById("carouselImages");
     var prevBtn = document.getElementById("prevBtn");
     var nextBtn = document.getElementById("nextBtn");
 
+    // 이미지 컨테이너와 이미지들 가져오기
+    const carouselImages = document.querySelector('.carousel-images');
+    const images = document.querySelectorAll('.carousel-images img');
+
+    // 이미지와 간격에 맞는 너비 설정
+    const imageCount = images.length;
+    const gap = 10; // CSS에서 설정한 `gap` 값
+    const imageWidth = images[0].clientWidth;
+
+    carouselImages.style.width = `${imageCount * (imageWidth + gap) - gap}px`;
+
+
     var isMobile = window.innerWidth <= 768; // 화면이 768px 이하라면 모바일로 간주
     var offsetRatio = isMobile ? 0.0015 : 0.01; // 모바일에서는 더 큰 비율로 이동
+
+    let markers = []; // 생성된 마커를 저장하는 배열
     
 
     // 현재 열려 있는 마커의 정보를 저장할 변수
     let currentOpenMarker = null;
 
+    // 현재 열려 있는 다각형의 정보를 저장할 변수
+    let currentOpenPolygon = null;
+
     // 현재 캐러셀이 열려 있는지 상태를 저장할 변수
     let isCarouselOpen = false;
+
+    let selectedPolygonData = null;
+
+    let currentIndex = 0; // 현재 활성화된 이미지 인덱스
+    const carouselWidth = document.querySelector('.carousel').clientWidth;
+
+
 
     // 캐러셀 닫기 함수
     function closeCarousel() {
@@ -69,8 +95,11 @@ window.onload = function () {
                 description: "다양한 문화와 예술적 감각이 살아 있는 활기찬 거리",
                 image: ["/static/images/arin.png", "/static/images/arin.png", "/static/images/arin.png", "/static/images/arin.png"],
                 keywords: ['aa','bb'],
-                video: "https://www.youtube.com/embed/iggsgJo6Df0?si=H_JL6eZ8ber5CxiK"
+                video: "/static/video/홍대1.MOV"
             },
+            markers: [ // 다각형과 관련된 마커 데이터
+                { lat: 37.553905, lng: 126.922566, title: "홍대" },
+            ],
 
             
             strokeColor: '#FF0000', // 경계선 색
@@ -89,8 +118,11 @@ window.onload = function () {
                 description: "다양한 문화와 예술적 감각이 살아 있는 활기찬 거리",
                 image: ["/static/images/arin.png", "/static/images/arin.png", "/static/images/arin.png", "/static/images/arin.png", "/static/images/faker.png", "/static/images/arin.png", "/static/images/arin.png", "/static/images/arin.png"],
                 keywords: ['aa','bb'],
-                video: "https://www.youtube.com/embed/iggsgJo6Df0?si=H_JL6eZ8ber5CxiK"
+                video: "/static/video/seogyo1.MOV"
             },
+            markers: [ // 다각형과 관련된 마커 데이터
+                { lat: 37.554086, lng: 126.916464, title: "서교동" },
+            ],
             strokeColor: '#0000FF', // 경계선 색
             fillColor: '#33FF57'   // 내부 채우기 색
         },
@@ -113,8 +145,11 @@ window.onload = function () {
                 description: "소박한 분위기와 힐링이 가능한 자연 친화적인 공간이 특징인 지역",
                 image: ["/static/images/arin.png", "/static/images/arin.png", "/static/images/arin.png", "/static/images/arin.png"],
                 keywords: ['aa','bb', 'cc'],
-                video: "https://www.youtube.com/embed/iggsgJo6Df0?si=H_JL6eZ8ber5CxiK"
+                video: "/static/video/yeonnam1.MOV"
             },
+            markers: [ // 다각형과 관련된 마커 데이터
+                { lat: 37.562092, lng: 126.922542, title: "연남동" },
+            ],
             strokeColor: '#0000FF', // 경계선 색
             fillColor: '#3357FF'   // 내부 채우기 색
         },
@@ -138,8 +173,11 @@ window.onload = function () {
                 description: "트렌디한 상점과 문화 공간이 가득한 젊고 활기찬 지역",
                 image: ["/static/images/arin.png", "/static/images/arin.png", "/static/images/arin.png", "/static/images/arin.png"],
                 keywords: ['aa','bb'],
-                video: "https://www.youtube.com/embed/iggsgJo6Df0?si=H_JL6eZ8ber5CxiK"
+                video: "/static/video/합정1.MOV"
             },
+            markers: [ // 다각형과 관련된 마커 데이터
+                { lat: 37.548356, lng: 126.912406, title: "합정" },
+            ],
             strokeColor: '#0000FF', // 경계선 색
             fillColor: '#FF33A8'   // 내부 채우기 색
         },
@@ -157,8 +195,11 @@ window.onload = function () {
                 description: "대학가의 활기와 다양한 청년 문화가 공존하는 에너지가 넘치는 동네",
                 image: ["/static/images/arin.png", "/static/images/arin.png", "/static/images/arin.png", "/static/images/arin.png"],
                 keywords: ['aa','bb'],
-                video: "https://www.youtube.com/embed/iggsgJo6Df0?si=H_JL6eZ8ber5CxiK"
+                video: "/static/video/sinchon1.MOV"
             },
+            markers: [ // 다각형과 관련된 마커 데이터
+                { lat: 37.557511, lng: 126.936873, title: "신촌" },
+            ],
             strokeColor: '#0000FF', // 경계선 색
             fillColor: '#A833FF'   // 내부 채우기 색
         },
@@ -176,9 +217,12 @@ window.onload = function () {
                 items: ["책방 M", "갤러리 N", "디저트샵 O"],
                 description: "세련된 패션과 여성스러운 분위기가 돋보이는 패션 중심지",
                 image: ["/static/images/arin.png", "/static/images/arin.png", "/static/images/arin.png", "/static/images/arin.png"],
-                keywords: ['aa','bb'],
-                video: "https://www.youtube.com/embed/iggsgJo6Df0?si=H_JL6eZ8ber5CxiK"
+                keywords: ['건강지향적인','bb'],
+                video: "/static/video/edae.mov"
             },
+            markers: [ // 다각형과 관련된 마커 데이터
+                { lat: 37.557708, lng: 126.944657, title: "이대" },
+            ],
             strokeColor: '#0000FF', // 경계선 색
             fillColor: '#33FFF5'   // 내부 채우기 색
         },
@@ -198,8 +242,11 @@ window.onload = function () {
                 description: "한적하면서도 트렌디한 카페와 힙한 거리가 젊은 층에게 인기 있는 동네",
                 image: ["/static/images/arin.png", "/static/images/arin.png", "/static/images/arin.png", "/static/images/arin.png"],
                 keywords: ['aa','bb'],
-                video: "https://www.youtube.com/embed/iggsgJo6Df0?si=H_JL6eZ8ber5CxiK"
+                video: "/static/video/mangwon2_market.MOV"
             },
+            markers: [ // 다각형과 관련된 마커 데이터
+                { lat: 37.556028, lng: 126.907358, title: "망원" },
+            ],
             strokeColor: '#0000FF', // 경계선 색
             fillColor: '#FFD433'   // 내부 채우기 색
         },
@@ -221,8 +268,11 @@ window.onload = function () {
                 description: "세련된 분위기의 작은 갤러리와 힙한 카페로 유명한 곳",
                 image: ["/static/images/arin.png", "/static/images/arin.png", "/static/images/arin.png", "/static/images/arin.png"],
                 keywords: ['aa','bb'],
-                video: "https://www.youtube.com/embed/iggsgJo6Df0?si=H_JL6eZ8ber5CxiK"
+                video: "/static/video/sangsoo2_cafe.MOV"
             },
+            markers: [ // 다각형과 관련된 마커 데이터
+                { lat: 37.547127, lng: 126.922107, title: "상수" },
+            ],
             strokeColor: '#0000FF', // 경계선 색
             fillColor: '#FF8C33'   // 내부 채우기 색
         },
@@ -244,15 +294,17 @@ window.onload = function () {
                 description: "고급스러운 분위기와 한적함이 어우러진 조용한 주거 지역",
                 image: ["/static/images/arin.png", "/static/images/arin.png", "/static/images/arin.png", "/static/images/arin.png"],
                 keywords: ['aa','bb'],
-                video: "https://www.youtube.com/embed/iggsgJo6Df0?si=H_JL6eZ8ber5CxiK"
+                video: "/static/video/yeonhui1.MOV"
             },
+            markers: [ // 다각형과 관련된 마커 데이터
+                { lat: 37.568266, lng: 126.930331, title: "연희동" },
+            ],
             strokeColor: '#0000FF', // 경계선 색
             fillColor: '#8C33FF'   // 내부 채우기 색
         }
     ];
 
-    // 현재 열려 있는 다각형의 정보를 저장할 변수
-    let currentOpenPolygon = null;
+    
     
     polygonsData.forEach(function(polygonData) {
         // 다각형 생성
@@ -273,6 +325,11 @@ window.onload = function () {
             if (currentOpenPolygon === polygon) {
                 drawer.classList.remove("open");
                 currentOpenPolygon = null;
+
+                // 마커 숨기기
+                // 안쓰면 주석처리 해버리기
+                markers.forEach(marker => marker.setMap(null));
+                markers = [];
                 return;
             }
 
@@ -283,9 +340,27 @@ window.onload = function () {
             drawerDescription.textContent = polygonData.region.description;
             drawerImage.src = polygonData.region.image[0];
             drawerVideo.src = polygonData.region.video;
+            // 비디오 업데이트
+            const videoUrl = polygonData.region.video;
+
+            // 영상이 로컬 파일인지 확인하고 처리
+            if (videoUrl) {
+                // 로컬 비디오 파일인 경우 <video> 태그의 src에 로컬 영상 경로 설정
+                videoSource.src = videoUrl;
+                drawerVideo.load();  // 새로 로드
+                drawerVideo.play();  // 영상 재생 시작
+            } else {
+                console.error('영상 경로가 제공되지 않았습니다.');
+            }
 
             drawer.classList.add("open");
+            photoDrawer.classList.remove("open");
             currentOpenPolygon = polygon;
+            selectedPolygonData = polygonData;
+
+             // 마커 생성
+             // 안쓰면 주석처리 해버리기
+            createMarkers(map, polygonData.markers); // polygonData에 연결된 markers 배열 사용
         });
 
         // 다각형 hover 이벤트
@@ -302,201 +377,53 @@ window.onload = function () {
         });
     });
 
-    // // 여러 개의 마커를 표시할 좌표 배열
-    // var markerPositions = [
-    //     { 
-    //         position: new kakao.maps.LatLng(37.553905, 126.922566),
-    //         name: "홍대",
-    //         items: ['카페 A', '레스토랑 B', '펍 C'], //drawer에 들어갈 것
-    //         description: "다양한 문화와 예술적 감각이 살아 있는 활기찬 거리",
-    //         image: ["/static/images/arin.png", "/static/images/arin.png", "/static/images/arin.png", "/static/images/arin.png"],
-    //         keywords: ['aa','bb'],
-    //         video: "https://www.youtube.com/embed/iggsgJo6Df0?si=H_JL6eZ8ber5CxiK"
-    //     },
-    //     { 
-    //         position: new kakao.maps.LatLng(37.554086, 126.916464),
-    //         name: "서교동",
-    //         items: ['카페 A', '레스토랑 B', '펍 C'], //drawer에 들어갈 것
-    //         description: "다양한 문화와 예술적 감각이 살아 있는 활기찬 거리",
-    //         image: ["/static/images/arin.png", "/static/images/arin.png", "/static/images/arin.png", "/static/images/arin.png", "/static/images/faker.png", "/static/images/arin.png", "/static/images/arin.png", "/static/images/arin.png"],
-    //         keywords: ['aa','bb'],
-    //         video: "https://www.youtube.com/embed/iggsgJo6Df0?si=H_JL6eZ8ber5CxiK"
-    //     },
-    //     { 
-    //         position: new kakao.maps.LatLng(37.562092, 126.922542),
-    //         name: "연남동",
-    //         items: ["책방 D", "갤러리 E", "디저트샵 F"],
-    //         description: "소박한 분위기와 힐링이 가능한 자연 친화적인 공간이 특징인 지역",
-    //         image: ["/static/images/arin.png", "/static/images/arin.png", "/static/images/arin.png", "/static/images/arin.png"],
-    //         keywords: ['aa','bb', 'cc'],
-    //         video: "https://www.youtube.com/embed/iggsgJo6Df0?si=H_JL6eZ8ber5CxiK"
-    //     },
-    //     { 
-    //         position: new kakao.maps.LatLng(37.548356, 126.912406),
-    //         name: "합정",
-    //         items: ["책방 G", "갤러리 H", "디저트샵 I"],
-    //         description: "트렌디한 상점과 문화 공간이 가득한 젊고 활기찬 지역",
-    //         image: ["/static/images/arin.png", "/static/images/arin.png", "/static/images/arin.png", "/static/images/arin.png"],
-    //         keywords: ['aa','bb'],
-    //         video: "https://www.youtube.com/embed/iggsgJo6Df0?si=H_JL6eZ8ber5CxiK"
-    //     },
-    //     { 
-    //         position: new kakao.maps.LatLng(37.557511, 126.936873),
-    //         name: "신촌",
-    //         items: ["책방 J", "갤러리 K", "디저트샵 L"],
-    //         description: "대학가의 활기와 다양한 청년 문화가 공존하는 에너지가 넘치는 동네",
-    //         image: ["/static/images/arin.png", "/static/images/arin.png", "/static/images/arin.png", "/static/images/arin.png"],
-    //         keywords: ['aa','bb'],
-    //         video: "https://www.youtube.com/embed/iggsgJo6Df0?si=H_JL6eZ8ber5CxiK"
-    //     },
-    //     { 
-    //         position: new kakao.maps.LatLng(37.557708, 126.944657),
-    //         name: "이대",
-    //         items: ["책방 M", "갤러리 N", "디저트샵 O"],
-    //         description: "세련된 패션과 여성스러운 분위기가 돋보이는 패션 중심지",
-    //         image: ["/static/images/arin.png", "/static/images/arin.png", "/static/images/arin.png", "/static/images/arin.png"],
-    //         keywords: ['aa','bb'],
-    //         video: "https://www.youtube.com/embed/iggsgJo6Df0?si=H_JL6eZ8ber5CxiK"
-    //     },
-    //     { 
-    //         position: new kakao.maps.LatLng(37.556028, 126.907358),
-    //         name: "망원",
-    //         items: ["책방 P", "갤러리 Q", "디저트샵 R"],
-    //         description: "한적하면서도 트렌디한 카페와 힙한 거리가 젊은 층에게 인기 있는 동네",
-    //         image: ["/static/images/arin.png", "/static/images/arin.png", "/static/images/arin.png", "/static/images/arin.png"],
-    //         keywords: ['aa','bb'],
-    //         video: "https://www.youtube.com/embed/iggsgJo6Df0?si=H_JL6eZ8ber5CxiK"
-    //     },
-    //     { 
-    //         position: new kakao.maps.LatLng(37.547127, 126.922107),
-    //         name: "상수",
-    //         items: ["책방 S", "갤러리 T", "디저트샵 U"],
-    //         description: "세련된 분위기의 작은 갤러리와 힙한 카페로 유명한 곳",
-    //         image: ["/static/images/arin.png", "/static/images/arin.png", "/static/images/arin.png", "/static/images/arin.png"],
-    //         keywords: ['aa','bb'],
-    //         video: "https://www.youtube.com/embed/iggsgJo6Df0?si=H_JL6eZ8ber5CxiK"
-    //     },
-    //     { 
-    //         position: new kakao.maps.LatLng(37.568266, 126.930331),
-    //         name: "연희동",
-    //         items: ["책방 V", "갤러리 W", "디저트샵 X"],
-    //         description: "고급스러운 분위기와 한적함이 어우러진 조용한 주거 지역",
-    //         image: ["/static/images/arin.png", "/static/images/arin.png", "/static/images/arin.png", "/static/images/arin.png"],
-    //         keywords: ['aa','bb'],
-    //         video: "https://www.youtube.com/embed/iggsgJo6Df0?si=H_JL6eZ8ber5CxiK"
-    //     }
-    // ];
+    // 마커 생성 함수
+    function createMarkers(map, markerData) {
+        // 이전 마커 제거
+        markers.forEach(marker => marker.setMap(null));
+        markers = [];
 
-
-    // Drawer 열기 함수 (마커 데이터로 업데이트)
-    function openDrawerWithMarkerData(markerData) {
-        // 캐러셀이 열려 있으면 먼저 닫기
-        if (isCarouselOpen) {
-            closeCarousel();
-        }
-        
-
-        // Drawer 데이터 업데이트
-        drawerTitle.textContent = markerData.name; // 제목 업데이트
-        drawerKeywords.innerHTML = markerData.keywords
-            .map(keyword => `<span class="tag">#${keyword}</span>`)
-            .join(""); // 키워드 동적 생성
-        drawerDescription.textContent = markerData.description; // 설명 업데이트
-        drawerImage.src = markerData.image[0]; // 첫 번째 이미지 설정
-        drawerVideo.src = markerData.video; // 동영상 URL 업데이트
-
-        drawer.classList.add("open"); // Drawer 열기
-        currentOpenMarker = markerData; // 현재 열려 있는 마커 데이터 설정
-    }
-
-    // 반복문으로 마커 생성 및 이벤트 추가
-    for (var i = 0; i < markerPositions.length; i++) {
-        (function (markerData) {
-            var marker = new kakao.maps.Marker({
-                position: markerData.position, // 마커 좌표
-                map: map, // 지도에 마커 추가
-                clickable: true // 마커 클릭 가능 여부
+        // 새 마커 생성
+        markerData.forEach(data => {
+            const marker = new kakao.maps.Marker({
+                position: new kakao.maps.LatLng(data.lat, data.lng),
+                map: map,
+                title: data.title
             });
+            markers.push(marker);
 
-            // 인포윈도우 내용 설정
-            var infowindow = new kakao.maps.InfoWindow({
-                content: `
-                    <div style="padding:10px; font-size:12px; text-align:center;">
-                        <strong>${markerData.name}</strong><br>
-                        <p style="margin:5px 0;">${markerData.description}</p>
-                        <img src="${markerData.image[0]}" alt="${markerData.name}" style="width:200px; height:auto; margin:5px 0;"><br>
-                    </div>
-                `, // HTML 문자열로 설정
-                removable: false // 닫기 버튼 없음
-            });
-
-            // 마커 hover (mouseover) 이벤트 등록 (인포윈도우 열기)
-            kakao.maps.event.addListener(marker, 'mouseover', function () {
-                infowindow.open(map, marker);
-            });
-
-            // 마커 hover (mouseout) 이벤트 등록 (인포윈도우 닫기)
-            kakao.maps.event.addListener(marker, 'mouseout', function () {
-                infowindow.close();
-            });
-
-
-            // 마커 클릭 이벤트
+            // 마커 클릭 이벤트 추가 (필요시)
             kakao.maps.event.addListener(marker, 'click', function () {
-                // 동일한 마커 클릭 시 Drawer 닫기
-                if (currentOpenMarker === marker) {
-                    drawer.classList.remove("open");
-                    currentOpenMarker = null;
-                    return;
-                }
-
-                // 새로운 마커 클릭 시 Drawer 열기
-                openDrawerWithMarkerData(markerData);
-            
-                
-                // // 다른 마커를 클릭하면 Drawer 열기
-                // drawer.classList.add("open"); // Drawer 열기
-                // currentOpenMarker = marker; // 현재 열려 있는 마커로 설정
-                selectedMarkerData = markerData; // 선택된 마커 데이터 설정
-
-
-                var newCenter = new kakao.maps.LatLng(
-                    markerData.position.getLat(), // 기존 위도 유지
-                    markerData.position.getLng() + offsetRatio // 경도 이동
-                );
-                
-                map.setCenter(newCenter);
-
-                // 지도 확대
-                setTimeout(function () {
-                    map.setLevel(4); // 레벨 4로 확대
-                }, 100); // 100ms 지연 후 확대 (타이밍 문제 해결)
+                alert(`마커 클릭: ${data.title}`);
             });
-        })(markerPositions[i]);
+        });
     }
+
+
 
     // Drawer 닫기 버튼 이벤트
     closeDrawerButton.addEventListener("click", function () {
-        console.log(document.getElementById("closeDrawer")); // null이면 문제가 있음
-        console.log(drawer); // drawer 확인
         drawer.classList.remove("open"); // Drawer 닫기
-        currentOpenPolygon = null; // 상태 초기화
         drawerVideo.src = ""; // 동영상 정지
+        currentOpenPolygon = null; // 상태 초기화
+        // 마커 숨기기
+        markers.forEach(marker => marker.setMap(null));
+        markers = [];
     });
 
 
-   // 화면 너비에 따라 한 번에 표시할 사진 개수를 계산하는 함수
+   // 화면에 보이는 사진 개수 계산 함수
     function getVisiblePhotosCount() {
-        const carouselWidth = document.getElementById("carouselImages").offsetWidth; // 캐러셀 너비
-        const photoWidth = document.querySelector("#carouselImages img").offsetWidth || 100; // 각 사진의 실제 너비
-        const visiblePhotos = Math.floor(carouselWidth / photoWidth); // 표시 가능한 사진 개수
-        return visiblePhotos > 0 ? visiblePhotos : 1; // 최소 1개는 보이도록 설정
+        const carouselContainerWidth = document.querySelector("#carousel").offsetWidth;
+        const photoWidth = document.querySelector("#carouselImages img").offsetWidth || 100;
+        const gap = 10; // 사진 간 간격
+        return Math.max(1, Math.floor(carouselContainerWidth / (photoWidth + gap)));
     }
 
     // '사진 더보기' 버튼 클릭 시 캐러셀 열기
     showMorePhotosButton.addEventListener("click", function () {
-        if (selectedMarkerData && selectedMarkerData.image && Array.isArray(selectedMarkerData.image)) {
-            carouselImages.innerHTML = selectedMarkerData.image
+        if (selectedPolygonData && selectedPolygonData.region.image.length > 0) {
+            carouselImages.innerHTML = selectedPolygonData.region.image
                 .map(image => `<img src="${image}" alt="Carousel Image">`)
                 .join("");
 
@@ -522,74 +449,54 @@ window.onload = function () {
     // 캐러셀 업데이트 함수
     function updateCarousel() {
         const photoWidth = document.querySelector("#carouselImages img").offsetWidth || 100; // 각 사진의 실제 너비
-        const offset = -currentSlide * photoWidth; // 한 슬라이드씩 이동
-        carouselImages.style.transform = `translateX(${offset}px)`;
+        const visiblePhotos = getVisiblePhotosCount(); // 화면에 보이는 사진 개수
+        const offset = -currentSlide * (photoWidth + gap); // 한 슬라이드씩 이동
+        carouselImages.style.transform = `translateX(${offset}px)`;        
     }
 
-    // 캐러셀 이전 버튼
+    // 이전 버튼 이벤트
     prevBtn.addEventListener("click", function () {
         if (currentSlide > 0) {
             currentSlide--;
             updateCarousel();
-
-
-            // 첫 번째 이미지에 도달하면 Prev 버튼 비활성화
-            if (currentSlide === 0) {
-                prevBtn.disabled = true; // 버튼 비활성화
-            }
         }
-
-        // 다음 버튼 활성화 (마지막 슬라이드가 아닐 경우)
-        const totalPhotos = selectedMarkerData.image.length;
+        const totalPhotos = selectedPolygonData.region.image.length;
         const visiblePhotos = getVisiblePhotosCount();
-        const maxSlideIndex = totalPhotos - visiblePhotos;
+        const maxSlideIndex = Math.max(0, totalPhotos - visiblePhotos);
 
-        if (currentSlide < maxSlideIndex) {
-            nextBtn.disabled = false;
-        }
+        prevBtn.disabled = currentSlide === 0;
+        nextBtn.disabled = currentSlide >= maxSlideIndex;
     });
 
 
-    // 캐러셀 다음 버튼
+    // 다음 버튼 이벤트
     nextBtn.addEventListener("click", function () {
-        const totalPhotos = selectedMarkerData.image.length; // 총 사진 개수
-        const visiblePhotos = getVisiblePhotosCount(); // 현재 화면에서 표시할 사진 개수
-        const maxSlideIndex = totalPhotos - visiblePhotos; // 마지막 슬라이드의 시작 인덱스
-        
+        const totalPhotos = selectedPolygonData.region.image.length;
+        const visiblePhotos = getVisiblePhotosCount();
+        const maxSlideIndex = Math.max(0, totalPhotos - visiblePhotos);
+
         if (currentSlide < maxSlideIndex) {
             currentSlide++;
             updateCarousel();
+        }
 
-            // 마지막 이미지에 도달하면 Next 버튼 비활성화
-            if (currentSlide >= maxSlideIndex) {
-                nextBtn.disabled = true; // 버튼 비활성화
-            }
-        }
-        
-        // 이전 버튼 활성화 (첫 번째 이미지가 아닐 경우)
-        if (currentSlide > 0) {
-            prevBtn.disabled = false; // Prev 버튼 활성화
-        }
+        nextBtn.disabled = currentSlide >= maxSlideIndex;
+        prevBtn.disabled = currentSlide === 0;
     });
 
     // 캐러셀 초기화 함수
     function initializeCarousel() {
-        currentSlide = 0; // 초기 슬라이드 설정
+        currentSlide = 0;
         updateCarousel();
-
-        // 초기 버튼 상태 설정
-        prevBtn.disabled = true; // 이전 버튼 비활성화
-        nextBtn.disabled = false;
-        const visiblePhotos = getVisiblePhotosCount();
-        const totalPhotos = selectedMarkerData.image.length;
-        nextBtn.disabled = totalPhotos <= visiblePhotos; // 전체 사진이 화면에 표시되면 Next 버튼 비활성화
+        prevBtn.disabled = true;
+        nextBtn.disabled = selectedPolygonData.region.image.length <= getVisiblePhotosCount();
     }
 
     // 화면 크기 변경 시 표시 사진 개수 업데이트
     window.addEventListener("resize", function () {
-        const totalPhotos = selectedMarkerData.image.length;
+        const totalPhotos = selectedPolygonData.region.image.length;
         const visiblePhotos = getVisiblePhotosCount();
-        const maxSlideIndex = totalPhotos - visiblePhotos;
+        const maxSlideIndex = Math.max(0, totalPhotos - visiblePhotos);
 
         // 캐러셀 상태 업데이트
         updateCarousel();

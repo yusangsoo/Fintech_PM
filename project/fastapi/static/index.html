@@ -47,16 +47,12 @@
         <!-- YouTube 영상과 버튼 -->
         <div class="video-container">
             <div class="video-wrapper">
-                <iframe 
-                    id="drawerVideo"
-                    src="https://www.youtube.com/embed/iggsgJo6Df0?si=H_JL6eZ8ber5CxiK"
-                    title="YouTube video player"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen>
-                ></iframe>
+                <!-- 로컬 영상이나 유튜브 영상이 들어갈 자리 -->
+                <video id="drawerVideo" width="100%" controls>
+                    <source id="videoSource" src="" type="video/mov">
+                    Your browser does not support the video tag.
+                </video>
             </div>
-            <button id="videoMoreBtn" class="btn video-more-btn">영상 더보기</button>
         </div>
     </div>
 
@@ -64,7 +60,11 @@
         <button id="backButton" class="btn back-button">뒤로 가기</button>
         <div id="carousel" class="carousel">
             <button id="prevBtn" class="carousel-btn">◀</button>
-            <div id="carouselImages" class="carousel-images"></div>
+            <div id="carouselImages" class="carousel-images">
+                <img src="image1.jpg" alt="Image 1">
+                <img src="image2.jpg" alt="Image 2">
+                <img src="image3.jpg" alt="Image 3">
+            </div>
             <button id="nextBtn" class="carousel-btn">▶</button>
         </div>
     </div>

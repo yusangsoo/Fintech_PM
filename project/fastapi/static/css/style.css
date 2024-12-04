@@ -58,7 +58,7 @@ body {
     top: 0;
     right: -50%;
     width: 40%;
-    height: 100%;
+    height: 100vh; /* 화면 높이의 50% */
     background-color: #ffffff;
     box-shadow: -4px 0 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
@@ -66,7 +66,6 @@ body {
     transition: right 0.3s ease;
     z-index: 1000;
     border-left: 1px solid #ddd;
-
 }
 
 /* Drawer 열림 상태 */
@@ -184,18 +183,26 @@ body {
     max-width: 600px;
     margin: 0 auto;
     overflow: hidden;
+    margin-top: 10px; /* 캐러셀 위쪽에 여백 추가 (필요시) */
+    overflow: hidden; /* 넘치는 부분 숨기기 */
 }
 
 .carousel-images {
     display: flex;
     transition: transform 0.3s ease-in-out;
     width: 100%;
+    width: calc(100% * N); /* 이미지 개수에 따라 N을 설정 (예: 이미지가 5개면 N=5) */
 }
 
 .carousel-images img {
     max-width: 100%;
     height: auto;
     flex-shrink: 0;
+    margin-right: 10px; /* 각 이미지 사이 간격 */
+}
+
+.carousel-images img:last-child {
+    margin-right: 0; /* 마지막 이미지는 간격 제거 */
 }
 
 .carousel-btn {
