@@ -89,7 +89,7 @@ body {
 
 /* 제목 스타일 */
 .title {
-    font-size: 1.8rem;
+    font-size: 3.2rem;
     color: #333;
     margin-bottom: 10px;
 }
@@ -121,6 +121,7 @@ body {
 .media-container {
     margin: 20px 0;
     text-align: center;
+    
 }
 
 .media-img {
@@ -190,15 +191,18 @@ body {
 .carousel-images {
     display: flex;
     transition: transform 0.3s ease-in-out;
-    width: 100%;
-    width: calc(100% * N); /* 이미지 개수에 따라 N을 설정 (예: 이미지가 5개면 N=5) */
+    position: relative;
+    white-space: nowrap; /* 이미지가 한 줄로 정렬되도록 설정 */
 }
 
 .carousel-images img {
-    max-width: 100%;
-    height: auto;
-    flex-shrink: 0;
-    margin-right: 10px; /* 각 이미지 사이 간격 */
+    height: auto; /* 높이를 자동으로 설정하여 원본 비율 유지 */
+    max-height: 300px; /* 세로로 너무 긴 이미지를 제한 */
+    width: auto; /* 너비를 원본 비율에 맞게 설정 */
+    max-width: 100%; /* 너무 가로로 긴 이미지를 제한 */
+    flex-shrink: 0; /* 이미지 크기가 축소되지 않도록 설정 */
+    margin-right: 10px; /* 이미지 간격 */
+    object-fit: contain; /* 원본 비율 유지 */
 }
 
 .carousel-images img:last-child {
@@ -224,4 +228,140 @@ body {
 
 #nextBtn {
     right: 0;
+}
+
+.toast {
+    visibility: hidden;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    z-index: 1000;
+    transition: visibility 0s, opacity 0.5s ease-in-out;
+    opacity: 0;
+}
+
+.toast.show {
+    visibility: visible;
+    opacity: 1;
+}
+.shop-section {
+    margin-top: 20px;
+    padding: 10px;
+    padding-bottom: 20px; /* 하단 패딩 추가 */
+    border-top: 1px solid #ccc;
+}
+
+.shop-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.shop-btn {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+/* 카페 버튼 스타일 */
+.cafe-btn {
+    background-color: #4CAF50; /* 초록색 */
+}
+
+.cafe-btn:hover {
+    background-color: #45A049; /* 밝은 초록색 */
+}
+
+/* 음식점 버튼 스타일 */
+.restaurant-btn {
+    background-color: #2196F3; /* 파란색 */
+}
+
+.restaurant-btn:hover {
+    background-color: #1E88E5; /* 밝은 파란색 */
+}
+
+/* 커스텀 오버레이 하는 곳 */
+.custom-overlay {
+    position: absolute;
+    /* bottom: 40px;
+    left: -50px;
+    width: 150px; */
+    /* background: white; */
+    /* border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); */
+    text-align: center;
+    font-size: 14px;
+    /* line-height: 1.5; */
+    /* padding: 10px; */
+    white-space: nowrap;
+    font-family: 'Roboto', sans-serif;
+    /* color: #000 */
+    color: #000;
+}
+
+/* Popup styles */
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.popup-content {
+    position: relative;
+    text-align: left;
+}
+
+.popup-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    color: gray;
+}
+
+.popup-close:hover {
+    color: black;
+}
+
+/* 텍스트 스타일 */
+.popup-content h3 {
+    font-size: 18px;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.popup-content ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: disc;
+    padding-left: 20px; /* 리스트 들여쓰기 */
+}
+
+.popup-content li {
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #555;
 }

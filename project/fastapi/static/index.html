@@ -15,10 +15,13 @@
             <img src="/static/images/moodmap.png" alt="Logo" class="logo">
             <nav class="nav-links">
                 <a href="#home">홈</a>
-                <a href="#gallery">갤러리</a>
+                <a href="#gallery" id="gallery-link">출처</a>
         </div>
     </header>
     <div id="map" class="map"></div>
+
+    <!-- Popup -->
+    <div id="popup" class="popup"></div>
 
     <!-- Drawer -->
     <div id="drawer" class="drawer">
@@ -37,13 +40,7 @@
         <p id="drawerDescription" class="description">
             여기에 장소에 대한 상세 설명이 들어갑니다.
         </p>
-        
-        <!-- 이미지와 버튼 -->
-        <div class="media-container">
-            <img id="drawerImage" src="/static/images/arin.png" alt="Drawer Image" class="media-img">
-            <button id="showMorePhotos" class="btn photo-more-btn">사진 더보기</button>
-        </div>
-        
+
         <!-- YouTube 영상과 버튼 -->
         <div class="video-container">
             <div class="video-wrapper">
@@ -54,6 +51,21 @@
                 </video>
             </div>
         </div>
+        <p>이미지</p>
+        <!-- 이미지와 버튼 -->
+        <div class="media-container">
+            <img id="drawerImage" src="/static/images/arin.png" alt="Drawer Image" class="media-img">
+            <button id="showMorePhotos" class="btn photo-more-btn">사진 더보기</button>
+        </div>
+
+        <!-- 음식점 및 카페 섹션 -->
+        <div id="shopSection" class="shop-section">
+            <h2>음식점 및 카페</h2>
+            <div class="shop-buttons">
+                <!-- 버튼은 JavaScript로 동적으로 생성됩니다 -->
+            </div>
+        </div>
+
     </div>
 
     <div id="photoDrawer" class="drawer">
@@ -69,6 +81,12 @@
         </div>
     </div>
 
+    <!-- 토스트 메시지 -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Additional JavaScript file -->
+    <script src="/static/js/source.js"></script>
     <script src="/static/js/script.js"></script>
+    
 </body>
 </html>
