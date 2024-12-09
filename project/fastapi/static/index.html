@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Moodmap</title>
     <link rel="stylesheet" href="/static/css/style.css">
-    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=cf3a0088cdd7e5a988917a5d9d8f16c9"></script>
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-neo.css" rel="stylesheet">
+    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey={{kakaomap_api_key}}"></script>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','{{gtm_id}}');</script>
+        <!-- End Google Tag Manager -->
 </head>
 <body>
     <header class="navbar">
@@ -16,7 +21,9 @@
             <nav class="nav-links">
                 <a href="#home">홈</a>
                 <a href="#gallery" id="gallery-link">출처</a>
+                <a href="https://forms.gle/Bds5dcvtdmH3RNmD7" target="_blank" class="survey-button">만족도 조사</a>
         </div>
+        <button id="share-button" class="share-button">공유하기</button>
     </header>
     <div id="map" class="map"></div>
 
@@ -28,6 +35,10 @@
         <button id="closeDrawer" class="close-btn">×</button>
         <!-- 제목 -->
         <h1 id="drawerTitle" class="title">지역명</h1>
+        <!-- 설명 -->
+        <p id="drawerDescription" class="description">
+            여기에 장소에 대한 상세 설명이 들어갑니다.
+        </p>
         
         <!-- 키워드 태그 -->
         <div id="drawerKeywords" class="keywords">
@@ -36,11 +47,8 @@
             <span class="tag"># 태그</span>
         </div>
         
-        <!-- 설명 -->
-        <p id="drawerDescription" class="description">
-            여기에 장소에 대한 상세 설명이 들어갑니다.
-        </p>
 
+        <h3>영상</h3>
         <!-- YouTube 영상과 버튼 -->
         <div class="video-container">
             <div class="video-wrapper">
@@ -51,7 +59,7 @@
                 </video>
             </div>
         </div>
-        <p>이미지</p>
+        <h3>이미지</h3>
         <!-- 이미지와 버튼 -->
         <div class="media-container">
             <img id="drawerImage" src="/static/images/arin.png" alt="Drawer Image" class="media-img">
@@ -69,7 +77,7 @@
     </div>
 
     <div id="photoDrawer" class="drawer">
-        <button id="backButton" class="btn back-button">뒤로 가기</button>
+        <button id="backButton" class="text-btn">뒤로 가기</button>
         <div id="carousel" class="carousel">
             <button id="prevBtn" class="carousel-btn">◀</button>
             <div id="carouselImages" class="carousel-images">
@@ -79,6 +87,7 @@
             </div>
             <button id="nextBtn" class="carousel-btn">▶</button>
         </div>
+        <button id="uploadButton" class="btn upload">사진 업로드</button>
     </div>
 
     <!-- 토스트 메시지 -->

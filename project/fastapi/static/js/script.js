@@ -1,5 +1,5 @@
 window.onload = function () {
-    // 지도 초기화
+    // // 지도 초기화
     var mapContainer = document.getElementById('map'); // 지도를 표시할 div
     var mapOption = {
         center: new kakao.maps.LatLng(37.558797, 126.926264), // 신촌 중심
@@ -72,6 +72,7 @@ window.onload = function () {
 
     var polygonsData = [
         {
+            id: '홍대',
             path: [
                 new kakao.maps.LatLng(37.549179, 126.913317),
                 new kakao.maps.LatLng(37.548856, 126.913907),
@@ -94,7 +95,7 @@ window.onload = function () {
                 name: "홍대",
                 items: ['카페 A', '레스토랑 B', '펍 C'], //drawer에 들어갈 것
                 description: "다양한 문화와 예술적 감각이 살아 있는 활기찬 거리",
-                image: ["/static/images/홍대1.JPG"],
+                image: ["/static/images/홍대1.JPG", "/static/images/hongdae2.png", "/static/images/hongdae3.png"],
                 keywords: ['예술적인','활기찬', '중심가'],
                 video: "/static/video/홍대1.MOV",
                 restaurants: [
@@ -115,6 +116,7 @@ window.onload = function () {
             fillColor: '#9370DB'   // 내부 채우기 색
         },
         {
+            id: '서교동',
             path: [
                 new kakao.maps.LatLng(37.554253, 126.911697),
                 new kakao.maps.LatLng(37.555789, 126.915061),
@@ -128,7 +130,7 @@ window.onload = function () {
                 name: "서교동",
                 items: ['카페 A', '레스토랑 B', '펍 C'], //drawer에 들어갈 것
                 description: "다양한 문화와 예술적 감각이 살아 있는 활기찬 거리",
-                image: ["/static/images/서교1.jpg"],
+                image: ["/static/images/서교1.jpg", "/static/images/seogyo2.png", "/static/images/seogyo3.png"],
                 keywords: ['가로수가 많은','작업하기 좋은', '산책하기 좋은'],
                 video: "/static/video/seogyo1.MOV",
                 restaurants: [
@@ -147,6 +149,7 @@ window.onload = function () {
             fillColor: '#90EE90'   // 내부 채우기 색
         },
         {
+            id: '연남동',
             path: [
                 new kakao.maps.LatLng(37.557528, 126.918758),
                 new kakao.maps.LatLng(37.560272, 126.916303),
@@ -166,7 +169,7 @@ window.onload = function () {
                 name: "연남동",
                 items: ["책방 D", "갤러리 E", "디저트샵 F"],
                 description: "소박한 분위기와 힐링이 가능한 자연 친화적인 공간이 특징인 지역",
-                image: ["/static/images/연남1.JPG", "/static/images/연남2.JPG", "/static/images/상수1.JPG"],
+                image: ["/static/images/연남1.JPG", "/static/images/연남2.JPG", "/static/images/yeonnam3.png", "/static/images/yeonnam4.png"],
                 keywords: ['감각적인','데이트하기 좋은', '미식이 발달'],
                 video: "/static/video/yeonnam1.MOV",
                 restaurants: [
@@ -185,6 +188,7 @@ window.onload = function () {
             fillColor: '#FF7F50'   // 내부 채우기 색
         },
         {
+            id: '합정',
             path: [
                 new kakao.maps.LatLng(37.549179, 126.913317),
                 new kakao.maps.LatLng(37.548856, 126.913907),
@@ -202,7 +206,7 @@ window.onload = function () {
                 name: "합정",
                 items: ["책방 G", "갤러리 H", "디저트샵 I"],
                 description: "트렌디한 상점과 문화 공간이 가득한 젊고 활기찬 지역",
-                image: ["/static/images/arin.png", "/static/images/arin.png", "/static/images/arin.png", "/static/images/arin.png"],
+                image: ["/static/images/hapjeong1.png", "/static/images/hapjeong2.png", "/static/images/hapjeong3.png"],
                 keywords: ['모임하기 좋은','교통의 요충지'],
                 video: "/static/video/합정1.MOV",
                 restaurants: [
@@ -221,6 +225,7 @@ window.onload = function () {
             fillColor: '#4682B4'   // 내부 채우기 색
         },
         {
+            id: '신촌',
             path: [
                 new kakao.maps.LatLng(37.556860, 126.931804),
                 new kakao.maps.LatLng(37.555178, 126.936859),
@@ -232,7 +237,7 @@ window.onload = function () {
                 name: "신촌",
                 items: ["책방 J", "갤러리 K", "디저트샵 L"],
                 description: "대학가의 활기와 다양한 청년 문화가 공존하는 에너지가 넘치는 동네",
-                image: ["/static/images/arin.png", "/static/images/arin.png", "/static/images/arin.png", "/static/images/arin.png"],
+                image: ["/static/images/sinchon1.png", "/static/images/sinchon2.png", "/static/images/sinchon3.png"],
                 keywords: ['가성비 좋은','활기찬', '일식이 많은'],
                 video: "/static/video/sinchon1.MOV",
                 restaurants: [
@@ -247,10 +252,11 @@ window.onload = function () {
             markers: [ // 다각형과 관련된 마커 데이터
                 { lat: 37.557511, lng: 126.936873, title: "신촌" },
             ],
-            strokeColor: '#FFA07A', // 경계선 색
-            fillColor: '#FFA07A'   // 내부 채우기 색
+            strokeColor: '#32CD32', // 경계선 색
+            fillColor: '#32CD32'   // 내부 채우기 색
         },
         {
+            id: '이대',
             path: [
                 new kakao.maps.LatLng(37.556324, 126.940637),
                 new kakao.maps.LatLng(37.559650, 126.940348),
@@ -263,7 +269,7 @@ window.onload = function () {
                 name: "이대",
                 items: ["책방 M", "갤러리 N", "디저트샵 O"],
                 description: "세련된 패션과 여성스러운 분위기가 돋보이는 패션 중심지",
-                image: ["/static/images/arin.png", "/static/images/arin.png", "/static/images/arin.png", "/static/images/arin.png"],
+                image: ["/static/images/edae2.png", "/static/images/edae1.png", "/static/images/edae3.png"],
                 keywords: ['건강지향적인','디저트가 많은'],
                 video: "/static/video/edae.MOV",
                 restaurants: [
@@ -282,6 +288,7 @@ window.onload = function () {
             fillColor: '#FFC1CC'   // 내부 채우기 색
         },
         {
+            id: '망원',
             path: [
                 new kakao.maps.LatLng(37.554253, 126.911697),
                 new kakao.maps.LatLng(37.555789, 126.915061),
@@ -294,7 +301,7 @@ window.onload = function () {
                 name: "망원",
                 items: ["책방 P", "갤러리 Q", "디저트샵 R"],
                 description: "한적하면서도 트렌디한 카페와 힙한 거리가 젊은 층에게 인기 있는 동네",
-                image: ["/static/images/망원1.JPG"],
+                image: ["/static/images/망원1.JPG", "/static/images/mangwon2.png", "/static/images/mangwon3.png"],
                 keywords: ['전통적이면서도 현대적인','아늑한', '여유로운'],
                 video: "/static/video/mangwon2_market.MOV",
                 restaurants: [
@@ -313,6 +320,7 @@ window.onload = function () {
             fillColor: '#DAA520'   // 내부 채우기 색
         },
         {
+            id: '상수',
             path: [
                 new kakao.maps.LatLng(37.548288, 126.920157),
                 new kakao.maps.LatLng(37.550565, 126.924183),
@@ -328,7 +336,7 @@ window.onload = function () {
                 name: "상수",
                 items: ["책방 S", "갤러리 T", "디저트샵 U"],
                 description: "세련된 분위기의 작은 갤러리와 힙한 카페로 유명한 곳",
-                image: ["/static/images/상수1.JPG", "/static/images/상수2.JPG", "/static/images/상수3.JPG"],
+                image: ["/static/images/상수1.JPG", "/static/images/상수2.JPG", "/static/images/상수3.JPG", "/static/images/sangsoo4.png"],
                 keywords: ['뷰가 좋은','차분한', '음악과 함께하는'],
                 video: "/static/video/sangsoo1.MOV",
                 restaurants: [
@@ -347,6 +355,7 @@ window.onload = function () {
             fillColor: '#20B2AA'   // 내부 채우기 색
         },
         {
+            id: '연희동',
             path: [
                 new kakao.maps.LatLng(37.565275, 126.925614),
                 new kakao.maps.LatLng(37.563293, 126.928221),
@@ -362,7 +371,7 @@ window.onload = function () {
                 name: "연희동",
                 items: ["책방 V", "갤러리 W", "디저트샵 X"],
                 description: "고급스러운 분위기와 한적함이 어우러진 조용한 주거 지역",
-                image: ["/static/images/연희1.JPG", "/static/images/연희2.JPG"],
+                image: ["/static/images/연희1.JPG", "/static/images/연희2.JPG", "/static/images/yeonhui3.png", "/static/images/yeonhui4.png"],
                 keywords: ['조용한','한적한', '감성적인'],
                 video: "/static/video/yeonhui1.MOV",
                 restaurants: [
@@ -377,13 +386,18 @@ window.onload = function () {
             markers: [ // 다각형과 관련된 마커 데이터
                 { lat: 37.568266, lng: 126.930331, title: "연희동" },
             ],
-            strokeColor: '#D3D3D3', // 경계선 색
-            fillColor: '#D3D3D3'   // 내부 채우기 색
+            strokeColor: '#6F4E37', // 경계선 색
+            fillColor: '#6F4E37'   // 내부 채우기 색
         }
     ];
 
-    
-    
+    // 공유하기 버튼 처리
+    const shareButton = document.getElementById('share-button');
+    shareButton.addEventListener('click', () => {
+        // 토스트 메시지 표시
+        showToast('공유해주시는 마음 너무 감사드립니다! 현재 주소 복사가 안돼 직접 공유 부탁드립니다 :)');
+    });
+
     polygonsData.forEach(function(polygonData) {
         // 다각형 생성
         var polygon = new kakao.maps.Polygon({
@@ -427,10 +441,22 @@ window.onload = function () {
                 markers = [];
                 return;
             }
+            // GTM으로 사용자 정의 이벤트 전송
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+                event: 'polygon_click', // 사용자 정의 이벤트 이름
+                polygon_id: polygonData.id // 클릭된 폴리곤 ID
+            });
+
+            // drawer의 스크롤을 맨 위로 이동
+            drawer.scrollTop = 0;
 
             drawerTitle.textContent = polygonData.region.name;
             drawerKeywords.innerHTML = polygonData.region.keywords
-                .map(keyword => `<span class="tag">#${keyword}</span>`)
+                .map(keyword => {
+                    // fillColor를 동적으로 반영하여 태그 생성
+                    return `<span class="tag" style="background-color: ${polygonData.fillColor};">#${keyword}</span>`;
+                })
                 .join("");
             drawerDescription.textContent = polygonData.region.description;
             drawerImage.src = polygonData.region.image[0];
@@ -458,7 +484,7 @@ window.onload = function () {
                     const classNames = `shop-btn ${restaurants.type}-btn`; // 올바른 변수명  
                     button.className = classNames
                     button.textContent = restaurants.name;
-                    button.onclick = () => showToast(`가게 추천은 추가할 예정입니다.`);
+                    button.onclick = () => showToast(`가게 추천 기능은 추가할 예정입니다.`);
                     restaurantButtonsContainer.appendChild(button);
                 });
             } else {
@@ -529,7 +555,6 @@ window.onload = function () {
             toast.className = "toast";
         }, 3000);
     }
-
 
    
    // 화면에 보이는 사진 개수 계산 함수
@@ -652,15 +677,28 @@ window.onload = function () {
         updateButtonState();
     }
 
+    // 업로드 버튼 처리
+    const uploadButton = document.getElementById('uploadButton');
+    uploadButton.onclick = () => {
+        // 클릭 시 업로드 메시지 출력
+        showToast("업로드 기능은 추가될 예정입니다.");
+    };
+
     // 팝업 띄우기
     // Select elements
     const galleryLink = document.getElementById('gallery-link');
     const popupClose = document.getElementById('popup-close');
 
-    // Show popup when the gallery link is clicked
+    // Show or hide popup when the gallery link is clicked
     galleryLink.addEventListener('click', (event) => {
         event.preventDefault(); // Prevent default anchor behavior
-        popup.style.display = 'block';
+        if (popup.style.display === 'block') {
+            // 팝업이 열려 있는 경우 숨기기
+            popup.style.display = 'none';
+        } else {
+            // 팝업이 닫혀 있는 경우 보이기
+            popup.style.display = 'block';
+        }
     });
 
     // Hide popup when the close button is clicked

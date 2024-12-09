@@ -1,10 +1,11 @@
 /* General styles */
 body {
-    font-family: Arial, sans-serif;
+    /* font-family: Arial, sans-serif; */
     margin: 0;
     padding: 0;
     background-color: #f9f9f9;
     color: #333;
+    font-family: 'NanumSquareNeo', sans-serif;
 }
 
 #app {
@@ -31,6 +32,25 @@ body {
     align-items: center;
 }
 
+.nav-links a, .share-button {
+    margin-right: 15px;
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.share-button {
+    background-color: #6c63ff;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: auto; /* 다른 요소와의 간격을 확보 */
+    margin-right: 30px; /* 오른쪽 끝과의 여백 설정 */
+
+}
+
 .logo {
     height: 60px;
     margin-right: 20px;
@@ -46,6 +66,19 @@ body {
     color: #333;
     font-size: 0.9rem;
     transition: color 0.2s ease;
+}
+
+/* 모바일 화면용 폰트 크기 조정 */
+@media (max-width: 768px) { /* 화면 너비가 768px 이하일 때 적용 */
+    .nav-links a {
+        font-size: 0.7rem; /* 모바일에서 작은 폰트 크기 */
+    }
+}
+
+@media (max-width: 480px) { /* 화면 너비가 480px 이하일 때 적용 */
+    .nav-links a {
+        font-size: 0.6rem; /* 더 작은 화면에서 더 작은 폰트 크기 */
+    }
 }
 
 .nav-links a:hover {
@@ -89,7 +122,7 @@ body {
 
 /* 제목 스타일 */
 .title {
-    font-size: 3.2rem;
+    font-size: 3.0rem;
     color: #333;
     margin-bottom: 10px;
 }
@@ -141,10 +174,32 @@ body {
     border-radius: 5px;
     font-size: 1rem;
     cursor: pointer;
+    font-family: 'NanumSquareNeo', sans-serif;
 }
 
 .btn:hover {
     background-color: #5a54d2;
+}
+
+.text-btn {
+    background: none; /* 배경 제거 */
+    color: #6c63ff; /* 텍스트 색상 */
+    border: none; /* 테두리 제거 */
+    font-size: 1rem; /* 텍스트 크기 */
+    cursor: pointer; /* 클릭 가능한 커서 */
+    padding: 0; /* 여백 제거 */
+    margin: 0; /* 여백 제거 */
+    text-decoration: underline; /* 텍스트에 밑줄 */
+    font-family: inherit; /* 폰트 상속 */
+}
+
+.text-btn:hover {
+    color: #5a54d2; /* 호버 시 텍스트 색상 변경 */
+    text-decoration: none; /* 호버 시 밑줄 제거 */
+}
+
+.text-btn:focus {
+    outline: none; /* 포커스 시 외곽선 제거 */
 }
 
 /* 영상 스타일 */
@@ -197,7 +252,7 @@ body {
 
 .carousel-images img {
     height: auto; /* 높이를 자동으로 설정하여 원본 비율 유지 */
-    max-height: 300px; /* 세로로 너무 긴 이미지를 제한 */
+    max-height: 500px; /* 세로로 너무 긴 이미지를 제한 */
     width: auto; /* 너비를 원본 비율에 맞게 설정 */
     max-width: 100%; /* 너무 가로로 긴 이미지를 제한 */
     flex-shrink: 0; /* 이미지 크기가 축소되지 않도록 설정 */
@@ -244,6 +299,7 @@ body {
     z-index: 1000;
     transition: visibility 0s, opacity 0.5s ease-in-out;
     opacity: 0;
+    font-family: 'NanumSquareNeo', sans-serif;
 }
 
 .toast.show {
@@ -272,6 +328,7 @@ body {
     cursor: pointer;
     color: #fff;
     transition: background-color 0.3s ease;
+    font-family: 'NanumSquareNeo', sans-serif;
 }
 
 /* 카페 버튼 스타일 */
@@ -295,20 +352,10 @@ body {
 /* 커스텀 오버레이 하는 곳 */
 .custom-overlay {
     position: absolute;
-    /* bottom: 40px;
-    left: -50px;
-    width: 150px; */
-    /* background: white; */
-    /* border: 1px solid #ccc;
-    border-radius: 4px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); */
     text-align: center;
     font-size: 14px;
-    /* line-height: 1.5; */
-    /* padding: 10px; */
     white-space: nowrap;
-    font-family: 'Roboto', sans-serif;
-    /* color: #000 */
+    font-family: 'NanumSquareNeoExtraBold', sans-serif;
     color: #000;
 }
 
@@ -319,12 +366,15 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 300px;
+    width: 80vw;
+    max-height: 400px; /* 최대 높이 제한 */
     background-color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
     z-index: 1000;
     padding: 20px;
+    overflow-y: auto; /* 세로 방향으로 스크롤 가능 */
+    overflow-x: auto; /* 가로 방향 스크롤 제거 */
 }
 
 .popup-content {
